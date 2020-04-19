@@ -29,6 +29,7 @@ class SearchTwitch:
         arg = "user-agent=[" + ua + "]"
 
         autoWriteFieName = 'TestOutputTUS_' + d.now().strftime('%Y_%m_%d_%H_%M%S') + '.txt'
+        saveWfile = r"C:\Users\cag36\Desktop\GitHub Projects\_Completed and Working Projects\twitch-scraper-master\logs\\" + autoWriteFieName
 
         self.textfile = open(readfile, "r")
         #self.write_to_file = open(writefile, 'a+')
@@ -103,9 +104,10 @@ def clicked2():
 def clicked3():
     if not readfile.strip():
         logger.info('Input file is null. Please enter real file.')
-    if not writefile.strip():
-        logger.info('Output file is null. Please enter correct values.')
+    # if not writefile.strip():
+    #    logger.info('Output file is null. Please enter correct values.')
     else:
+        writefile = ''
         thread = threading.Thread(target=s.mainFunction(readfile, writefile))
         thread.start()
         # s.mainFunction(readfile, writefile)
@@ -113,7 +115,7 @@ def clicked3():
 
 logger = logging.getLogger('server_logger')
 file_name = 'TUS_Logs_' + d.now().strftime('%Y_%m_%d_%H_%M%S') + '.log'
-save_file = r"C:\Users\cag36\Desktop\GitHub Projects\_Completed and Working Projects\twitch-scraper-master\logs\\" + file_name
+save_file = r"C:\Users\cag36\Desktop\GitHub Projects\_Completed and Working Projects\twitch-scraper-master\TestOutputFiles\\" + file_name
 logger.setLevel(logging.INFO)
 fh = logging.FileHandler(save_file, encoding="utf-8")
 fh.setLevel(logging.INFO)
@@ -132,10 +134,10 @@ logger.addHandler(fh)
 s = SearchTwitch()
 
 btn_input_file = Button(window, text="Select input file:  ", command=clicked1, height=2, width=15)
-btn_output_file = Button(window, text='Select output file: ', command=clicked2, height=2, width=15)
+# btn_output_file = Button(window, text='Select output file: ', command=clicked2, height=2, width=15)
 btn_run = Button(window, text='Run Program', command=clicked3, height=2, width=15)
 
 btn_input_file.grid(column=1, row=0)
-btn_output_file.grid(column=1, row=1)
+#btn_output_file.grid(column=1, row=1)
 btn_run.grid(column=1, row=2)
 window.mainloop()
